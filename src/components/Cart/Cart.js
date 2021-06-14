@@ -2,8 +2,9 @@ import React from 'react';
 import {Container, Typography, Button, Grid} from '@material-ui/core';
 import useStyles from './style';
 import CartItem from  './CardItem/CartItem';
+import {Link} from 'react-router-dom';
 
-const Cart = ({cart}) => {
+const Cart = ({cart,  handleUpdateCartQty , handleRemoveFromCart, handleEmptyCart}) => {
 
    
 
@@ -22,7 +23,7 @@ const Cart = ({cart}) => {
 	     <Grid container spacing={3}>
 	        {cart.line_items.map((item) => (
 	        	<Grid item xs={12} sm={4} key={item.id}>
-	        	   <CartItem item={item}/>
+	        	   <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
 	        	</Grid>
 
 	        ))}
@@ -33,8 +34,8 @@ const Cart = ({cart}) => {
 	      	  </Typography>
 
 	        	<div>
-	      	       <Button classNam={classes.emptyButton} size="large" type="button" variant="contained" color="secondary">Empty Cart</Button>
-	      	       <Button classNam={classes.checkoutButton} size="large" type="button" variant="contained" color="primary">Check out</Button>
+	      	       <Button classNam={classes.emptyButton} onClick={handleEmptyCart} size="large" type="button" variant="contained" color="secondary">Empty Cart</Button>
+	      	       <Button classNam={classes.checkoutButton} component={Link} to="/checkout" size="large" type="button" variant="contained" color="primary">Check out</Button>
 	        	</div>
 
 	      </div>
